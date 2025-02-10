@@ -1,5 +1,10 @@
 # Cat vs. Dog Classification with Data Augmentation
 
+Group 7
+
+1. Soham Gaonkar (23110314)
+2. Chaitanya Sharma (23110072)
+
 This repository demonstrates how data augmentation can improve the performance of a binary image classifier (Cats vs. Dogs) using the ResNet-50 model.
 
 ### Resnet50 Model
@@ -35,8 +40,11 @@ This repository demonstrates how data augmentation can improve the performance o
 
 #### Example :
 
-1: Shuffle Pixels -> Padding -> Opacity -> Done
-2: Brightness -> Opacity -> Scale -> Done
+Original Image:
+
+Augment 1: Shuffle Pixels -> Padding -> Opacity -> Done
+
+Augment 2: Brightness -> Opacity -> Scale -> Done
 
 ![Example Aug](Images/aug.png)
 ---
@@ -49,6 +57,40 @@ This repository demonstrates how data augmentation can improve the performance o
 
 
 ### Task 2: Model Training
+- Loads ResNet-50 pretrained model  
+- Modifies classifier for binary classification (Cats vs. Dogs)  
+- Initializes weights using Kaiming Normal  
+- Saves initialized weights for later use  
+- Moves model to GPU/CPU for computation  
+
+```python
+# Load ResNet-50 model
+model_name = "microsoft/resnet-50"
+model = AutoModelForImageClassification.from_pretrained(model_name)
+
+# Modify classifier for binary classification (Cats vs. Dogs)
+in_features = model.classifier[-1].in_features  # Access last layer's input features
+model.classifier[-1] = nn.Linear(in_features, 2)  # Change to binary classification (2 classes)
+
+# Function to initialize weights
+def initialize_weights(module):
+    if isinstance(module, nn.Linear) or isinstance(module, nn.Conv2d):
+        nn.init.kaiming_normal_(module.weight, mode='fan_out', nonlinearity='relu')
+        if module.bias is not None:
+            nn.init.constant_(module.bias, 0)
+
+# Apply initialization
+model.apply(initialize_weights)
+
+# Save initialized weights (before training)
+torch.save(model.state_dict(), "initial_weights.pth")
+
+# Move model to device
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
+
+print("Model initialized and classifier modified successfully.")
+```
 
 - **Training Loss Curves:**  
   ![Training Loss](Images/TrainLoss.png)
