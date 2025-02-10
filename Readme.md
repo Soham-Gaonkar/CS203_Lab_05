@@ -117,6 +117,8 @@ The low accuracy is likely due to the limited amount of data (112 original train
 
 Although augmentation increased the training size, some augmentations introduced unrealistic variations (e.g., random sizes and images with multiple cats) that may confuse the model. 
 
+Data augmentation increases the diversity of training examples, helping the model generalize better to unseen data ,hence its performance is better than without augmentation,but not significantly.
+
 The perfect recall indicates nearly all dogs (class 1) are detected, but the low precision suggests many cats (class 0) are misclassified as dogs. Improving data quality and using more targeted augmentation strategies may enhance performance.
 
 ---
