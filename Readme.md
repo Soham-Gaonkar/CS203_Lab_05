@@ -5,6 +5,9 @@ Group 7
 1. Soham Gaonkar (23110314)
 2. Chaitanya Sharma (23110072)
 
+colab link : [Colab Link](https://colab.research.google.com/drive/1r2WO6V1zD3-b7O4WOQ1nABMP1FJhCU_M#scrollTo=6OA4FKjd1rYu)
+Incase the github doesn't render the notebook properly, please use the above link to view the notebook in colab.
+
 This repository demonstrates how data augmentation can improve the performance of a binary image classifier (Cats vs. Dogs) using the ResNet-50 model.
 
 ### Resnet50 Model
